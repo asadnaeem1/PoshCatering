@@ -1,0 +1,26 @@
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "name": "Asad",
+    "email": "fahad12349@yopmail.com",
+    "password": "asadasad"
+}
+
+###
+GET http://localhost:3000/users/dashboard
+
+###
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "email": "fahad12349@yopmail.com",
+    "password": "asadasad"
+}
+
+###
+POST http://localhost:3000/users/login?email=asad@yopmail.com&password=asadasad
+
+###
+GET http://localhost:3000/users/logout
