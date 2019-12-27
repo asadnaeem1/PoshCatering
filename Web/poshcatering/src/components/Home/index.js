@@ -1,16 +1,15 @@
-import React from 'react'
+import React from 'react';
 import NavBar from './NavBar';
-import UICarousel from './UICarousel';
 import TextParagraph from './TextParagraph';
 import Jumbotron from './Jumbotron';
-import {navBar, carouselItems, aboutUsContent} from '../../constants';
+import {navBar, aboutUsContent, mainPageJumbotron} from '../../constants';
 
 export default function index() {
     // <UICarousel items ={carouselItems}/>
+    // {<NavBar content={navBar}/>}
     return (
         <div>
-            <NavBar content={navBar}/>
-            <Jumbotron/>
+            <Jumbotron content={mainPageJumbotron}/>
             <TextParagraph content={aboutUsContent}/>
         </div>
     )

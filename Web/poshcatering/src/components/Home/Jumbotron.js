@@ -1,23 +1,9 @@
 import React from 'react';
 import bannerImage from '../../assets/carousel/banner1.jpg';
-import {Typography, Container} from '@material-ui/core';
+import {Typography, Container, makeStyles} from '@material-ui/core';
 
-export default function Jumbotron() {
-    return (
-        <div style={styles.mainDiv}>
-            <div style={styles.innerDiv}>
-                <Container>
-                    <Typography variant="h3">Get the best Catering services in town!</Typography>
-                    <Typography variant="h5">POSH Catering, for all your catering needs.</Typography>
-                </Container>
-            </div>
-        </div>
-    )
-}
-
-const styles = {
+const useStyles = makeStyles(theme => ({
     mainDiv: {
-        backgroundImage: `url(${bannerImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: '50vh'
@@ -30,4 +16,20 @@ const styles = {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         color: 'white',
     }
+}))
+
+
+export default function Jumbotron({content}) {
+    const classes = useStyles();
+    const {title,description,imageURL=bannerImage} = content;
+    return (
+        <div className={classes.mainDiv} style={{backgroundImage: `url(${imageURL})`}}>
+            <div className={classes.innerDiv}>
+                <Container>
+                    <Typography variant="h3">{title}</Typography>
+                    <Typography variant="h5">{description}</Typography>
+                </Container>
+            </div>
+        </div>
+    )
 }

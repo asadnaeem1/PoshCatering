@@ -3,9 +3,9 @@ const User = require('../models/User');
 
 module.exports = (passport) => {
     passport.use(
-        new LocalStrategy({ usernameField: 'email'}, (email, password, done) => {
-            console.log("Debug-->",email,password);
-            User.findOne({ email: email }, function (err, user) {
+        new LocalStrategy({ usernameField: 'email', passReqToCallback: true}, (req, email, password, done) => {
+            // console.log("Debug-->",req.accountType);
+            User.findOne({ email, accountType: req.accountType }, function (err, user) {
                 console.log("User-->",user)
                 if (err) { return done(err); }
                 if (!user) {

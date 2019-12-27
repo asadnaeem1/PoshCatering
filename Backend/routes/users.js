@@ -4,12 +4,12 @@ const router = express.Router();
 const User = require('../models/User');
 const {ensureAuthenticated, forwardAuthenticated} = require('../config/auth');
 
-router.post('/register',forwardAuthenticated, (req,res)=>{
+router.post('/signup',forwardAuthenticated, (req,res)=>{
     const {email} = req.body;
     res.contentType('application/json');
     res.status(500);
     //check if user exists
-    User.findOne({ email }).then((user) => {
+    User.findOne({ email , accountType: 'user'}).then((user) => {
         if(!user){
             new User({
                 ...req.body
@@ -36,8 +36,12 @@ router.post('/register',forwardAuthenticated, (req,res)=>{
         })
     })
 })
+const addParamAccountType = function(req,res,next){
+    req.accountType = 'user';
+    next();
+}
 
-router.post('/login', forwardAuthenticated, passport.authenticate('local'), (req, res) => {
+router.post('/signin', forwardAuthenticated, addParamAccountType, passport.authenticate('local'), (req, res) => {
         res.status(200);
         res.json({
             message: "Login successful"
@@ -51,6 +55,16 @@ router.get('/logout', ensureAuthenticated, (req, res) => {
     res.json({
         message: "Logout successful"
     });
+})
+
+router.get('/authenticationstatus', (req,res)=>{
+    res.status(200);
+    if(req.isAuthenticated()){
+        res.json({status: "authenticated"});
+    }
+    else{
+        res.json({status: "notauthenticated"});
+    }
 })
 
 module.exports = router;

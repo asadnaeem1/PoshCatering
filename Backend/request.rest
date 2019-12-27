@@ -1,4 +1,4 @@
-POST http://localhost:3000/users/register
+POST http://localhost:4000/users/signup
 Content-Type: application/json
 
 {
@@ -8,10 +8,10 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/users/dashboard
+GET http://localhost:4000/users/dashboard
 
 ###
-POST http://localhost:3000/users/login
+POST http://localhost:4000/users/signin
 Content-Type: application/json
 
 {
@@ -20,7 +20,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/users/login?email=asad@yopmail.com&password=asadasad
+GET http://localhost:4000/users/logout
 
 ###
-GET http://localhost:3000/users/logout
+GET http://localhost:4000/users/authenticationstatus
+
+###
+GET http://localhost:4000/data/partners
